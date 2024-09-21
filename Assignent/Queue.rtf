@@ -1,0 +1,605 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Britannic Bold;}{\f1\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\qc\f0\fs52\lang9 # Queue :-\par
+
+\pard\sa200\sl276\slmult1\b\i\f1\fs40 1. WRITE A PROGRAM TO PERFORM INSERT , DELETE AND PEEK OPERATION OF A SIMPLE QUEUE.\par
+\i0\fs28 //Simple Queue\par
+\par
+#include <stdio.h>\par
+#define SIZE 10\par
+class queue\par
+\{\par
+    int front=-1;\par
+    int rear=-1;\par
+    int arr[SIZE];\par
+    public:\par
+\par
+    int isempty()\par
+    \{\par
+        if(front==rear)\par
+        \{\par
+            return 1;\par
+        \}\par
+        else\par
+        \{\par
+            return 0;\par
+        \}\par
+    \}\par
+    int isfull()\par
+    \{\par
+        if(rear==SIZE-1)\par
+        \{\par
+            return 1;\par
+        \}\par
+        else\par
+        \{\par
+            return 0;\par
+        \}\par
+    \}\par
+    void insert()\par
+    \{\par
+        if(isfull())\par
+        \{\par
+            printf("\\nQueue overflow.....");\par
+        \}\par
+        else\par
+        \{\par
+            rear++;\par
+            printf("\\nEnter the number to insert: ");\par
+            scanf("%d",&arr[rear]);\par
+        \}\par
+    \}\par
+    void delet()\par
+    \{\par
+        if(isempty())\par
+        \{\par
+            printf("\\nQueue underflow.....");\par
+        \}\par
+        else\par
+        \{\par
+            front++;\par
+            printf("\\narr[%d]= %d",front,arr[front]);\par
+        \}\par
+    \}\par
+    void peek()\par
+    \{\par
+        if(isempty())\par
+        \{\par
+            printf("\\nQueue underflow.....");\par
+        \}\par
+        else\par
+        \{\par
+            printf("\\narr[%d]= %d",front+1,arr[front+1]);\par
+        \}\par
+    \}\par
+\};\par
+\par
+int main()\par
+\{\par
+    int n=0;\par
+    queue q;\par
+    while(n!=4)\par
+    \{\par
+        printf("\\n\\nEnter choice:-\\n1. Insert\\n2. Delete\\n3. Peek\\n4. Exit\\n");\par
+        scanf("%d",&n);\par
+        switch(n)\par
+        \{\par
+            case 1: q.insert();\par
+                    break;\par
+            case 2: q.delet();\par
+                    break;\par
+            case 3: q.peek();\par
+                    break;\par
+            case 4: break;\par
+        \}\par
+    \}\par
+    return 0;\par
+\}\i\fs40\par
+\par
+OUTPUT:-\par
+\i0\fs28 PS C:\\Users\\Khushi Patel\\data stucture\\.vscode\\Ds> cd Queue\par
+PS C:\\Users\\Khushi Patel\\data stucture\\.vscode\\Ds\\Queue> gcc SimpleQueue.cpp\par
+PS C:\\Users\\Khushi Patel\\data stucture\\.vscode\\Ds\\Queue> ./a.exe \par
+\par
+\par
+Enter choice:-\par
+1. Insert     \par
+2. Delete     \par
+3. Peek       \par
+4. Exit       \par
+2\par
+\par
+Queue underflow.....\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+1\par
+\par
+Enter the number to insert: 2\par
+\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+1\par
+\par
+Enter the number to insert: 7\par
+\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+1\par
+\par
+Enter the number to insert: 4\par
+\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+2\par
+\par
+arr[0]= 2\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+2\par
+\par
+arr[1]= 7\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+2\par
+\par
+arr[2]= 4\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+2\par
+\par
+Queue underflow.....\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+1\par
+\par
+Enter the number to insert: 23\par
+\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+1\par
+\par
+Enter the number to insert: -76\par
+\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+1\par
+\par
+Enter the number to insert: 25\par
+\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+1\par
+\par
+Enter the number to insert: -45\par
+\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+1\par
+\par
+Enter the number to insert: 0\par
+\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+1\par
+\par
+Enter the number to insert: 37\par
+\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+2\par
+\par
+arr[3]= 23\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+2\par
+\par
+arr[4]= -76\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+2\par
+\par
+arr[5]= 25\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+2\par
+\par
+arr[6]= -45\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+2\par
+\par
+arr[7]= 0\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+1\par
+\par
+Enter the number to insert: 54\par
+\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+1\par
+\par
+Queue overflow.....\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+23\par
+\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+1\par
+\par
+Queue overflow.....\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+3\par
+\par
+arr[8]= 37\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+2\par
+\par
+arr[8]= 37\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+3\par
+\par
+arr[9]= 54\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+2\par
+\par
+arr[9]= 54\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+2\par
+\par
+Queue underflow.....\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+2\par
+\par
+Queue underflow.....\par
+\par
+Enter choice:-\par
+1. Insert\par
+2. Delete\par
+3. Peek\par
+4. Exit\par
+4\par
+PS C:\\Users\\Khushi Patel\\data stucture\\.vscode\\Ds\\Queue> \i\fs40\par
+\par
+2.WRITE A PROGRAM TO PERFORM INSERT , DELETE AND PEEK OPERATION OF A CIRCULAR QUEUE.\par
+\i0\fs28 #include <stdio.h>\par
+\par
+class queue\par
+\{\par
+    int f=-1,r=-1;\par
+    int a[5];\par
+    public: \par
+\par
+    int isfull()\par
+    \{\par
+        if(r==4 && f==0)\par
+        \{\par
+            return 1;\par
+        \}\par
+        else if(r==f-1)\par
+        \{\par
+            return 1;\par
+        \}\par
+        else\par
+        \{\par
+            return 0;\par
+        \}\par
+    \par
+    \}\par
+    int isempty()\par
+    \{\par
+        if(r==-1 && f==-1)\par
+        \{\par
+            return 1;\par
+        \}\par
+        else if(r==f-1)\par
+        \{\par
+            r=-1;\par
+            f=-1;\par
+            return 1;\par
+        \}\par
+        else\par
+        \{\par
+            return 0;\par
+        \}\par
+    \}\par
+    void insert()\par
+    \{\par
+        if(isfull())\par
+        \{\par
+            printf("\\nQueue is full\\n");\par
+        \}\par
+        else\par
+        \{\par
+            if(r==-1 && f==-1)\par
+            \{\par
+                r++;\par
+                f++;\par
+            \}\par
+            else if(r==4)\par
+            \{\par
+                r=0;\par
+            \}\par
+            else\par
+            \{\par
+                r++;\par
+            \}\par
+            printf("Enter the number: ");\par
+            scanf("%d",&a[r]);\par
+        \}   \par
+    \}\par
+    void delet()\par
+    \{\par
+        if(isempty())\par
+        \{\par
+            printf("\\nQueue is empty\\n");\par
+        \}\par
+        else\par
+        \{\par
+\par
+            if(f==4 && r==4)\par
+            \{\par
+                f=-1;\par
+                r=-1;\par
+                printf("\\n%d",a[4]);\par
+            \}\par
+            if(f==4)\par
+            \{\par
+                f=-1;\par
+                printf("\\n%d",a[4]);\par
+            \}\par
+            else\par
+            \{\par
+                f++;\par
+                printf("\\n%d",a[f-1]);\par
+            \}\par
+        \}\par
+            \par
+    \}\par
+    void peek()\par
+    \{\par
+        if(!isempty())\par
+        \{\par
+            printf("\\n%d",a[r]);\par
+        \}\par
+    \}\par
+\par
+\};\par
+int main()\par
+\{\par
+    queue q;\par
+    int n=0;\par
+    while(n!=4)\par
+    \{\par
+        printf("\\nEnter 1 for insert\\nEnter 2 for delete\\nEnter 3 for peek\\nEnter 4 for exit\\n");\par
+        scanf("%d",&n);\par
+        switch(n)\par
+        \{\par
+            case 1: q.insert();\par
+                    break;\par
+            case 2: q.delet();\par
+                    break;\par
+            case 3: q.peek();\par
+                    break;\par
+        \}\par
+    \}\par
+    return 0;\par
+\}\i\fs40\par
+OUTPUT:-\par
+\i0\fs28 PS C:\\Users\\Khushi Patel\\data stucture\\.vscode\\Ds> cd Queue\par
+PS C:\\Users\\Khushi Patel\\data stucture\\.vscode\\Ds\\Queue> gcc circularqueue.cpp\par
+PS C:\\Users\\Khushi Patel\\data stucture\\.vscode\\Ds\\Queue> ./a.exe \par
+\par
+Enter 1 for insert\par
+Enter 2 for delete\par
+Enter 3 for peek  \par
+Enter 4 for exit  \par
+2\par
+\par
+Queue is empty\par
+\par
+Enter 1 for insert\par
+Enter 2 for delete\par
+Enter 3 for peek\par
+Enter 4 for exit\par
+1\par
+Enter the number: 4\par
+\par
+Enter 1 for insert\par
+Enter 2 for delete\par
+Enter 3 for peek\par
+Enter 4 for exit\par
+1\par
+Enter the number: 6\par
+\par
+Enter 1 for insert\par
+Enter 2 for delete\par
+Enter 3 for peek\par
+Enter 4 for exit\par
+1\par
+Enter the number: 23\par
+\par
+Enter 1 for insert\par
+Enter 2 for delete\par
+Enter 3 for peek\par
+Enter 4 for exit\par
+1\par
+Enter the number: 89\par
+\par
+Enter 1 for insert\par
+Enter 2 for delete\par
+Enter 3 for peek\par
+Enter 4 for exit\par
+1\par
+Enter the number: 32\par
+\par
+Enter 1 for insert\par
+Enter 2 for delete\par
+Enter 3 for peek\par
+Enter 4 for exit\par
+1\par
+\par
+Queue is full\par
+\par
+Enter 1 for insert\par
+Enter 2 for delete\par
+Enter 3 for peek\par
+Enter 4 for exit\par
+2  \par
+\par
+4\par
+Enter 1 for insert\par
+Enter 2 for delete\par
+Enter 3 for peek\par
+Enter 4 for exit\par
+2\par
+\par
+6\par
+Enter 1 for insert\par
+Enter 2 for delete\par
+Enter 3 for peek\par
+Enter 4 for exit\par
+2\par
+\par
+23\par
+Enter 1 for insert\par
+Enter 2 for delete\par
+Enter 3 for peek\par
+Enter 4 for exit\par
+2\par
+\par
+89\par
+Enter 1 for insert\par
+Enter 2 for delete\par
+Enter 3 for peek\par
+Enter 4 for exit\par
+2\par
+\par
+32\par
+Enter 1 for insert\par
+Enter 2 for delete\par
+Enter 3 for peek\par
+Enter 4 for exit\par
+4\par
+PS C:\\Users\\Khushi Patel\\data stucture\\.vscode\\Ds\\Queue> \b0\fs22\par
+}
+ 

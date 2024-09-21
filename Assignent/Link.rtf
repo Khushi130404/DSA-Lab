@@ -1,0 +1,1208 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Britannic Bold;}{\f1\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\qc\i\f0\fs72\lang9 # Linked List :-\par
+
+\pard\sa200\sl276\slmult1\f1\fs40\tab\b 1. WRITE A PROGRAM TO PERFORM DIFFERENT OPERATIONS ON SINGLY LINKED LIST.\par
+\i0\fs28 //Singly Linked List\par
+\par
+#include <stdio.h>\par
+#include <stdlib.h>\par
+#include <ctype.h> //Header file to convert upper to lower or lower to upper\par
+\par
+struct node \par
+\{\par
+    int info;\par
+    struct node *link;\par
+\};typedef struct node node; //To assign nickname to data type\par
+\par
+void Display(node*);\par
+void Create_link_list(node*);\par
+int Count(node*);\par
+int largest(node*);\par
+node* Insert_first(node*);\par
+node* Getnode();\par
+void Insert_last(node*);\par
+node* Search(node*,int);\par
+void Insert_after(node*);\par
+node* Delete_first(node*);\par
+void Delete_last(node*);\par
+node* Delete_any(node*);\par
+node* Insert_before(node*);\par
+node* Rev_link_list(node*);\par
+node* copy_link_list(node*);\par
+node* get_malloc();\par
+node* concate(node*,node*);\par
+\par
+int main()\par
+\{\par
+    node *head,*temp;\par
+    int item;\par
+    node* head2;\par
+    head=(node*)malloc(sizeof(node));\par
+    Create_link_list(head);\par
+    Display(head);\par
+    printf("\\nCount: %d",Count(head));\par
+    printf("\\nLargest info: %d",largest(head));\par
+    printf("\\nDisplay operation after insertion: ");\par
+    head=Insert_first(head);\par
+    Display(head);\par
+    node *crrptr=head;\par
+    Insert_last(head);\par
+    Display(head);\par
+    printf("\\nSearch Operation: ");\par
+    printf("\\nEnter node info to search: ");\par
+    scanf("%d",&item);\par
+    temp = Search(head,item);\par
+    if(temp==NULL)\par
+    \{\par
+        printf("\\nNode not found");\par
+    \}\par
+    else\par
+    \{\par
+        printf("\\nNode Found");\par
+    \}\par
+    printf("\\nInserting an element after item");\par
+    Insert_after(head);\par
+    Display(head);\par
+    printf("\\n\\nDelete first node ");\par
+    head = Delete_first(head);\par
+    Display(head);\par
+    printf("\\nDeleting Last element");\par
+    Delete_last(head);\par
+    Display(head);\par
+    printf("\\nDelete any info");\par
+    head=Delete_any(head);\par
+    Display(head);\par
+    printf("\\nBefor Insertion");\par
+    head = Insert_before(head);\par
+    Display(head);\par
+    printf("\\nReverse the linked list");\par
+    head=Rev_link_list(head);\par
+    Display(head);\par
+    return 0;\par
+\}\par
+\par
+void Display(node* crrptr)\par
+\{\par
+    while(crrptr!=NULL)\par
+    \{\par
+        printf("\\n%d",crrptr->info);\par
+        crrptr=crrptr->link;\par
+    \}\par
+\par
+\}\par
+void Create_link_list(node* crrptr)\par
+\{\par
+    node *newnode;\par
+    char ans;\par
+    while(1)\par
+    \{\par
+        printf("\\nEnter the info: ");\par
+        scanf("%d",&crrptr->info);\par
+        fflush(stdin);\par
+        printf("\\nDo you want to continue? ");\par
+        scanf("%c",&ans);\par
+        if(toupper(ans)=='Y')\par
+        \{\par
+            newnode=(node*)malloc(sizeof(node));\par
+            crrptr->link=newnode;\par
+            crrptr=newnode;\par
+        \}\par
+        else\par
+        \{\par
+            crrptr->link=NULL;\par
+            break;\par
+        \}\par
+    \}\par
+\par
+\}\par
+int Count (node* crrptr)\par
+\{\par
+    int c=0;\par
+    while(crrptr!=NULL)\par
+    \{\par
+        c++;\par
+        crrptr=crrptr->link;\par
+    \}\par
+    return c;\par
+\}\par
+int largest (node* crrptr)\par
+\{\par
+    int max=crrptr->info;\par
+    crrptr=crrptr->link;\par
+    while(crrptr!=NULL)\par
+    \{\par
+        if(max<crrptr->info)\par
+        \{\par
+            max=crrptr->info;\par
+        \}\par
+        crrptr=crrptr->link;\par
+    \}\par
+    return max;\par
+\}\par
+node* Insert_first(node* crrptr)\par
+\{\par
+    node* newnode;\par
+    newnode = Getnode();\par
+    newnode->link=crrptr;\par
+    return newnode;\par
+\}\par
+node* Getnode()\par
+\{\par
+    node* newnode;\par
+    newnode=(node*)malloc(sizeof(node));\par
+    printf("\\nEnter the number : ");\par
+    scanf("%d",&newnode->info);\par
+    return newnode;\par
+\}\par
+void Insert_last(node *crrptr)\par
+\{\par
+    node *newnode=Getnode();\par
+    newnode->link=NULL;\par
+    while(crrptr->link!=NULL)\par
+    \{   \par
+        crrptr=crrptr->link;\par
+    \}\par
+    crrptr->link=newnode;   \par
+\}\par
+node* Search(node* crrptr,int item)\par
+\{\par
+    while(crrptr!=NULL)\par
+    \{\par
+        if(crrptr->info==item)\par
+        \{\par
+            return crrptr;  //Node Found\par
+        \}\par
+        crrptr=crrptr->link;\par
+    \}\par
+    return NULL;  //Node not found\par
+    //return crrptr\par
+\}\par
+void Insert_after(node* crrptr)\par
+\{\par
+    node* location;\par
+    node *newnode;\par
+    int search_item;\par
+    printf("\\nEnter the info after which you want to insert a node");\par
+    scanf("%d",&search_item);\par
+    location = Search(crrptr,search_item);\par
+    if(location == NULL)\par
+    \{\par
+        printf("\\nSearch item not found\\nInsertion not possible");\par
+    \}\par
+    else\par
+    \{   \par
+    \par
+        newnode=Getnode();\par
+        newnode->link=location->link;\par
+        location->link=newnode;\par
+    \}\par
+\}\par
+node* Delete_first(node* crrptr)\par
+\{\par
+    // crrptr = crrptr->link;\par
+    // return crrptr;\par
+    \par
+    //return crrptr->link;\par
+\par
+    node* temp;\par
+    temp=crrptr;\par
+    crrptr = crrptr->link;\par
+    free(temp);\par
+    return crrptr;\par
+\}\par
+void Delete_last(node* crrptr)\par
+\{\par
+    while(crrptr->link->link!=NULL)\par
+    \{\par
+        crrptr=crrptr->link;\par
+    \}\par
+    crrptr->link=NULL;\par
+\}\par
+node* Delete_any (node* crrptr)\par
+\{\par
+    node* first;\par
+    first=crrptr;\par
+    if(crrptr!=NULL)\par
+    \{\par
+    node* location;\par
+    int item,flage=0;\par
+    printf("\\nEnter the number to delete: ");\par
+    scanf("%d",&item);\par
+    if(crrptr->info==item)\par
+    \{\par
+        flage=1;\par
+        crrptr=crrptr->link;\par
+        first=crrptr;\par
+    \}\par
+    else\par
+    \{\par
+        while(crrptr->link!=NULL)\par
+        \{\par
+            if(crrptr->link->info==item)\par
+            \{\par
+                crrptr->link=crrptr->link->link;\par
+                flage=1;\par
+                break;\par
+            \}\par
+            crrptr=crrptr->link;   \par
+        \}\par
+    \}\par
+    if(flage==0)\par
+    \{\par
+        printf("\\nNode not found");\par
+    \}\par
+    \}\par
+    return first;\par
+\}\par
+node* Insert_before(node * crrptr)\par
+\{\par
+    node* newnode;\par
+    node* temp;\par
+    temp=crrptr;\par
+    int item,flage=0;\par
+    printf("\\nEnter the info: ");\par
+    scanf("%d",&item);\par
+    if(temp->info==item)\par
+    \{\par
+        flage=1;\par
+        newnode=Getnode();\par
+        newnode->link=crrptr;\par
+        return newnode;\par
+    \}\par
+    while(crrptr->link->info!=item && crrptr->link!=NULL)\par
+    \{\par
+        crrptr=crrptr->link;\par
+    \}\par
+    if(crrptr->link!=NULL)\par
+    \{\par
+        flage=1;\par
+       newnode=Getnode();\par
+       newnode->link=crrptr->link;\par
+       crrptr->link=newnode;\par
+    \}\par
+   if(flage==0)\par
+   \{\par
+        printf("\\nNode not found");\par
+        return temp;\par
+   \}\par
+    return temp;\par
+\}\par
+node* Rev_link_list(node* crrptr)\par
+\{\par
+    node* nxptr;\par
+    node* first;\par
+    first=NULL;\par
+    while(crrptr!=NULL)\par
+    \{\par
+        nxptr=crrptr->link;\par
+        crrptr->link=first;\par
+        first=crrptr;\par
+        crrptr=nxptr;\par
+\par
+    \}\par
+    return first;\par
+\}\par
+node* get_malloc()\par
+\{\par
+    node* newnode;\par
+    newnode=(node*)malloc(sizeof(node*));\par
+    return newnode;\par
+\}\par
+node* copy_link_list(node* crrptr)\par
+\{\par
+    node* head=NULL;\par
+    node* newnode;\par
+    node* node;\par
+    while(crrptr!=NULL)\par
+    \{\par
+        if(head==NULL)\par
+        \{\par
+            head=get_malloc();\par
+            head->info=crrptr->info;\par
+            head->link=NULL;\par
+            node=head;\par
+        \}\par
+        else\par
+        \{\par
+            newnode=get_malloc();\par
+            newnode->info=crrptr->info;\par
+            node->link=newnode;\par
+            node=newnode;\par
+        \}\par
+        crrptr=crrptr->link;\par
+    \}\par
+    return head;\par
+\}\par
+node* concate(node* crrptr1,node* crrptr2)\par
+\{\par
+    node* temp=crrptr1;\par
+    while(crrptr1->link!=NULL)\par
+    \{\par
+        crrptr1=crrptr1->link;\par
+    \}\par
+    crrptr1->link=crrptr2;\par
+    return temp;\par
+\}\par
+\i\fs40 OUTPUT:-\par
+\i0\fs28 PS C:\\Users\\Khushi Patel\\data stucture\\.vscode\\Ds> cd LinkedList\par
+PS C:\\Users\\Khushi Patel\\data stucture\\.vscode\\Ds\\LinkedList> gcc Singlylinkedlist.cpp\par
+PS C:\\Users\\Khushi Patel\\data stucture\\.vscode\\Ds\\LinkedList> ./a.exe      \par
+\par
+Enter the info: 5\par
+\par
+Do you want to continue? y\par
+\par
+Enter the info: 7\par
+\par
+Do you want to continue? y\par
+\par
+Enter the info: 8\par
+\par
+Do you want to continue? y\par
+\par
+Enter the info: 3\par
+\par
+Do you want to continue? n\par
+\par
+5\par
+7\par
+8\par
+3\par
+Count: 4\par
+Largest info: 8\par
+Display operation after insertion:\par
+Enter the number : 1\par
+\par
+1\par
+5\par
+7\par
+8\par
+3\par
+Enter the number : 0\par
+\par
+1\par
+5\par
+7\par
+8\par
+3\par
+0\par
+Search Operation:\par
+Enter node info to search: 7\par
+\par
+Node Found\par
+Inserting an element after item\par
+Enter the info after which you want to insert a node8\par
+\par
+Enter the number : 2\par
+\par
+1\par
+5\par
+7\par
+8\par
+2\par
+3\par
+0\par
+\par
+Delete first node\par
+5\par
+7\par
+8\par
+2\par
+3\par
+0\par
+Deleting Last element\par
+5\par
+7\par
+8\par
+2\par
+3\par
+Delete any info\par
+Enter the number to delete: 8\par
+\par
+5\par
+7\par
+2\par
+3\par
+Befor Insertion\par
+Enter the info: 7\par
+\par
+Enter the number : 1\par
+\par
+5\par
+1\par
+7\par
+2\par
+3\par
+Reverse the linked list\par
+3\par
+2\par
+7\par
+1\par
+5\par
+PS C:\\Users\\Khushi Patel\\data stucture\\.vscode\\Ds\\LinkedList> \i\fs40\par
+2.  WRITE A PROGRAM TO PERFORM DIFFERENT OPERATIONS ON DOUBLY LINKED LIST.\par
+\i0\fs28 // Doubly Linked List\par
+\par
+#include <stdio.h>\par
+#include <ctype.h>\par
+#include <stdlib.h>\par
+\par
+struct node\par
+\{\par
+    int info;\par
+    struct node* prev;\par
+    struct node* next;\par
+\};typedef struct node node;\par
+\par
+node* Getnode();\par
+void Display_forward(node*);\par
+void Display_backward(node*);\par
+node* Insert_first(node*);\par
+node* Insert_last(node*);\par
+node* Search(node*,int);\par
+node* Insert_before(node*);\par
+node* Delete_first(node*);\par
+node* Delete_last(node*);\par
+node* Delete_any(node*);\par
+\par
+int main()\par
+\{   \par
+    node* newnode;\par
+    char ans;\par
+    int item;\par
+    node* left=NULL;\par
+    node* right=NULL;\par
+    \par
+     while(1)\par
+    \{\par
+        printf("\\nDo you want to continue? ");\par
+        fflush(stdin);\par
+        scanf("%c",&ans);\par
+       \par
+        if(toupper(ans)=='Y')\par
+        \{\par
+            newnode=Getnode();\par
+            if(right==NULL)\par
+            \{\par
+                left=newnode;\par
+                right=newnode;\par
+            \}\par
+            else\par
+            \{\par
+                right->next=newnode;\par
+                newnode->prev=right;\par
+                right=newnode;\par
+            \}  \par
+        \par
+        \}\par
+        else\par
+        \{\par
+            break;\par
+        \}   //End of else\par
+    \}   //End of while\par
+    \par
+    printf("\\nPrinting from forwrd");\par
+    Display_forward(left);\par
+    printf("\\nPrinting from backward");\par
+    Display_backward(right);\par
+    printf("\\nBefore Insertion");\par
+    left=Insert_first(left);\par
+    printf("\\nForward display\\n");\par
+    Display_forward(left);\par
+    printf("\\nBackward display\\n");\par
+    Display_backward(right);\par
+    printf("\\nInsertion in last");\par
+    right=Insert_last(right);\par
+    printf("\\nForward display\\n");\par
+    Display_forward(left);\par
+    printf("\\nBackward display\\n");\par
+    Display_backward(right);\par
+    printf("\\nEnter the number to search: ");\par
+    scanf("%d",&item);\par
+    newnode=Search(right,item);\par
+    if(newnode!=NULL)\par
+    \{\par
+        printf("\\nNode found");\par
+    \}\par
+    else\par
+    \{\par
+        printf("\\nNode not found");\par
+    \}\par
+    printf("\\nBefore Insertion");\par
+    left=Insert_before(right);\par
+    printf("\\nPrinting from forwrd");\par
+    Display_forward(left);\par
+    printf("\\nPrinting from backward");\par
+    Display_backward(right);\par
+    printf("\\nDelete first");\par
+    left=Delete_first(left);\par
+    printf("\\nPrinting from forwrd");\par
+    Display_forward(left);\par
+    printf("\\nPrinting from backward");\par
+    Display_backward(right);\par
+    printf("\\nDelete last");\par
+    right=Delete_last(right);\par
+    printf("\\nPrinting from forwrd");\par
+    Display_forward(left);\par
+    printf("\\nPrinting from backward");\par
+    Display_backward(right);\par
+    printf("\\nDelete any");\par
+    node* mynode;\par
+    mynode=Delete_any(right);\par
+    if(mynode==NULL)    //Empty link list\par
+    \{\par
+        left=NULL;\par
+        right=NULL;\par
+    \}\par
+    else if(mynode->prev==NULL)\par
+    \{\par
+        left=mynode;\par
+    \}\par
+    else if(mynode->next==NULL)\par
+    \{\par
+        right=mynode;\par
+    \}\par
+    else\par
+    \{\par
+        right=mynode;\par
+    \}\par
+    printf("\\nPrinting from forwrd");\par
+    Display_forward(left);\par
+    printf("\\nPrinting from backward");\par
+    Display_backward(right);\par
+\par
+    return 0;\par
+\par
+\}\par
+\par
+node* Getnode()\par
+\{\par
+    node* newnode;\par
+    newnode=(node*)malloc(sizeof(node));\par
+    printf("\\nEnter info: ");\par
+    scanf("%d",&newnode->info);\par
+    newnode->next=NULL;\par
+    newnode->prev=NULL;\par
+    return newnode;\par
+\}\par
+void Display_forward(node* crrptr)\par
+\{\par
+    while(crrptr!=NULL)\par
+    \{\par
+        printf("\\n%d",crrptr->info);\par
+        crrptr=crrptr->next;\par
+    \}\par
+\}\par
+void Display_backward(node* crrptr)\par
+\{\par
+    while(crrptr!=NULL)\par
+    \{\par
+        printf("\\n%d",crrptr->info);\par
+        crrptr=crrptr->prev;\par
+    \}\par
+\} \par
+node* Insert_first(node* crrptr)\par
+\{\par
+    node* newnode;\par
+    newnode=Getnode();\par
+    newnode->next=crrptr;\par
+    crrptr->prev=newnode;\par
+    crrptr=newnode;\par
+    return crrptr;\par
+\}\par
+node* Insert_last(node* crrptr)\par
+\{\par
+    node* newnode=Getnode();\par
+    crrptr->next=newnode;\par
+    newnode->prev=crrptr;\par
+    crrptr=newnode;\par
+    return crrptr;\par
+\}\par
+node* Search(node* crrptr,int item)\par
+\{\par
+    while(crrptr!=NULL)\par
+    \{\par
+        if(crrptr->info!=item)\par
+        \{\par
+            crrptr=crrptr->prev;\par
+        \}\par
+        else\par
+        \{\par
+            break;\par
+        \}\par
+    \}\par
+    return crrptr;  \par
+\}\par
+node* Insert_before(node* crrptr)\par
+\{\par
+    int item;\par
+    node* first;\par
+    node* newnode;\par
+    printf("\\nEnter the info to search: ");\par
+    fflush(stdin);\par
+    scanf("%d",&item);\par
+    node* node=Search(crrptr,item);\par
+    if(node!=NULL)\par
+    \{\par
+        newnode=Getnode();\par
+        if(node->prev!=NULL)\par
+        \{\par
+            \par
+            //newnode->prev=node->prev;\par
+            newnode->next=node;\par
+            //node->prev=newnode;\par
+            node->prev->next=newnode;\par
+            newnode->prev=node->prev;\par
+            node->prev=newnode;\par
+            while(crrptr->prev!=NULL)\par
+            \{\par
+                crrptr=crrptr->prev;\par
+            \}\par
+            first=crrptr;\par
+        \}\par
+        else\par
+        \{\par
+            newnode->next=node;\par
+            node->prev=newnode;\par
+            node=newnode;\par
+            first=node;\par
+        \}\par
+\par
+    \}\par
+    else\par
+    \{\par
+        while(crrptr->prev!=NULL)\par
+        \{\par
+            crrptr=crrptr->prev;\par
+        \}\par
+        first=crrptr;\par
+        printf("\\nNode not found");\par
+    \}\par
+    return first;\par
+\}\par
+node* Delete_first(node* crrptr)\par
+\{   \par
+    node* temp;\par
+    temp=crrptr;\par
+    if(crrptr->next==NULL)\par
+    \{\par
+        crrptr=NULL;\par
+        free(temp);\par
+    \}\par
+    else\par
+    \{\par
+        crrptr=crrptr->next;\par
+        temp->next=NULL;\par
+        crrptr->prev=NULL;\par
+        free(temp);\par
+    \}\par
+    return crrptr;\par
+\}\par
+node* Delete_last(node* crrptr)\par
+\{\par
+    node* temp=crrptr;\par
+    if(crrptr->prev==NULL)\par
+    \{\par
+        free(temp);\par
+        crrptr=NULL;\par
+    \}\par
+    else\par
+    \{\par
+        crrptr=crrptr->prev;\par
+        temp->prev=NULL;\par
+        crrptr->next=NULL;\par
+        free(temp);\par
+    \}\par
+    return crrptr;\par
+\}\par
+node* Delete_any(node* crrptr)\par
+\{\par
+    node* temp;\par
+    node* first=crrptr;\par
+    int item;\par
+    printf("\\nEnter the info to delete");\par
+    scanf("%d",&item);\par
+    crrptr=Search(crrptr,item);\par
+    if(crrptr==NULL)\par
+    \{\par
+        printf("\\nNode not found");\par
+    \}\par
+    else\par
+    \{\par
+        if(crrptr->next==NULL && crrptr->prev==NULL) //When there is only one node\par
+        \{\par
+            temp=crrptr;\par
+            first=NULL;\par
+            free(temp);\par
+        \}\par
+        else if(crrptr->prev==NULL)\par
+        \{\par
+            temp=crrptr;\par
+            crrptr=crrptr->next;\par
+            temp->next=NULL;\par
+            crrptr->prev=NULL;\par
+            free(temp);\par
+            first=crrptr;\par
+        \}\par
+        else if(crrptr->next==NULL)\par
+        \{\par
+            temp=crrptr;\par
+            crrptr=crrptr->prev;\par
+            temp->prev=NULL;\par
+            crrptr->next=NULL;\par
+            free(temp);\par
+            first=crrptr;\par
+        \}\par
+        else\par
+        \{\par
+            temp=crrptr;\par
+            crrptr=crrptr->prev;\par
+            crrptr->next=temp->next;\par
+            temp->next->prev=crrptr;\par
+            temp->next=NULL;\par
+            temp->prev=NULL;\par
+            free(temp);\par
+        \}\par
+    \}\par
+    return first;\par
+\}\i\fs40\par
+OUTPUT:-\par
+\i0\fs28 PS C:\\Users\\Khushi Patel\\data stucture\\.vscode\\Ds> cd LinkedList\par
+PS C:\\Users\\Khushi Patel\\data stucture\\.vscode\\Ds\\LinkedList> gcc DoublyLinkedList.cpp\par
+PS C:\\Users\\Khushi Patel\\data stucture\\.vscode\\Ds\\LinkedList> ./a.exe      \par
+\par
+Do you want to continue? y\par
+\par
+Enter info: 7\par
+\par
+Do you want to continue? y\par
+\par
+Enter info: 4\par
+\par
+Do you want to continue? y\par
+\par
+Enter info: 3\par
+\par
+Do you want to continue? y\par
+\par
+Enter info: 2\par
+\par
+Do you want to continue? n\par
+\par
+Printing from forwrd\par
+7\par
+4\par
+3\par
+2\par
+Printing from backward\par
+2\par
+3\par
+4\par
+7\par
+Before Insertion\par
+Enter info: 1\par
+\par
+Forward display\par
+\par
+1\par
+7\par
+4\par
+3\par
+2\par
+Backward display\par
+\par
+2\par
+3\par
+4\par
+7\par
+1\par
+Insertion in last\par
+Enter info: 2\par
+\par
+Forward display\par
+\par
+1\par
+7\par
+4\par
+3\par
+2\par
+2\par
+Backward display\par
+\par
+2\par
+2\par
+3\par
+4\par
+7\par
+1\par
+Enter the number to search: 3\par
+\par
+Node found\par
+Before Insertion\par
+Enter the info to search: 4\par
+\par
+Enter info: 5\par
+\par
+Printing from forwrd\par
+1\par
+7\par
+5\par
+4\par
+3\par
+2\par
+2\par
+Printing from backward\par
+2\par
+2\par
+3\par
+4\par
+5\par
+7\par
+1\par
+Delete first\par
+Printing from forwrd\par
+7\par
+5\par
+4\par
+3\par
+2\par
+2\par
+Printing from backward\par
+2\par
+2\par
+3\par
+4\par
+5\par
+7\par
+Delete last\par
+Printing from forwrd\par
+7\par
+5\par
+4\par
+3\par
+2\par
+Printing from backward\par
+2\par
+3\par
+4\par
+5\par
+7\par
+Delete any\par
+Enter the info to delete7\par
+\par
+Printing from forwrd\par
+5\par
+4\par
+3\par
+2\par
+Printing from backward\par
+2\par
+3\par
+4\par
+5\par
+PS C:\\Users\\Khushi Patel\\data stucture\\.vscode\\Ds\\LinkedList> \i\fs40\par
+3. WRITE A PROGRAM TO PERFORM DIFFERENT OPERATIONS ON CIRCULAR LINKED LIST.\par
+\i0\fs28 //Circular Linked List\par
+\par
+#include <stdio.h>\par
+#include <stdlib.h>\par
+#include <ctype.h>\par
+\par
+struct node\par
+\{\par
+    struct node* link;\par
+    int info;\par
+\};typedef struct node node;\par
+\par
+void Create_circular_list(node*);\par
+node* Getnode();\par
+void Display(node* head);\par
+node* Insert_first(node*);\par
+node* Delete_first(node*);\par
+void Insert_last(node*);\par
+void Delete_last(node*);\par
+node* Insert_before(node*);\par
+node* Delete_any(node*);\par
+\par
+int main()\par
+\{\par
+    node* head;\par
+    head=(node*)malloc(sizeof(node));\par
+    printf("\\nCreation of linked list");\par
+    head=Getnode();\par
+    Create_circular_list(head);\par
+    printf("\\nDisplay");\par
+    Display(head);\par
+    printf("\\nInsert first");\par
+    head=Insert_first(head);\par
+    Display(head);\par
+    printf("\\nDelete first node");\par
+    head=Delete_first(head);\par
+    Display(head);\par
+    printf("\\nInsert last");\par
+    Insert_last(head);\par
+    Display(head);\par
+    printf("\\nDelete last");\par
+    Delete_last(head);\par
+    Display(head);\par
+    printf("\\nInsert before");\par
+    head=Insert_before(head);\par
+    Display(head);\par
+    printf("\\nDelete any");\par
+    head=Delete_any(head);\par
+    Display(head);\par
+    return 0;\par
+\}\par
+\par
+node* Getnode()\par
+\{\par
+    node* newnode;\par
+    newnode=(node*)malloc(sizeof(node));\par
+    printf("\\nEnter info: ");\par
+    scanf("%d",&newnode->info);\par
+    return newnode;\par
+\}\par
+void Create_circular_list(node* crrptr)\par
+\{\par
+    char ans;\par
+    node* newnode;\par
+    node* first=crrptr;\par
+    while(1)\par
+    \{\par
+        printf("\\nDo you want to enter info? ");\par
+        fflush(stdin);\par
+        scanf("%c",&ans);\par
+        if(toupper(ans)=='Y')\par
+        \{\par
+            newnode=Getnode();\par
+            crrptr->link=newnode;\par
+            crrptr=newnode;\par
+        \}\par
+        else\par
+        \{\par
+            crrptr->link=first;\par
+            break;\par
+        \}\par
+    \}\par
+\}\par
+void Display(node* crrptr)\par
+\{\par
+    node* first=crrptr;\par
+    \par
+    do\par
+    \{\par
+        printf("\\n%d",crrptr->info);\par
+        crrptr=crrptr->link;\par
+    \}while(crrptr!=first);\par
+\}\par
+node* Insert_first(node* crrptr)\par
+\{\par
+    node* newnode;\par
+    newnode=Getnode();\par
+    node* first = crrptr;\par
+    while(crrptr->link!=first)\par
+    \{\par
+        crrptr=crrptr->link;\par
+    \}\par
+    newnode->link=first;\par
+    crrptr->link=newnode;\par
+    first=newnode;\par
+    return first;\par
+\}\par
+node* Delete_first(node* crrptr)\par
+\{\par
+    node* first=crrptr;\par
+    while(crrptr->link!=first)\par
+    \{\par
+        crrptr=crrptr->link;\par
+    \}\par
+    crrptr->link=first->link;\par
+    first->link=NULL;\par
+    free(first);\par
+    return crrptr->link;\par
+\}\par
+void Insert_last(node* crrptr)\par
+\{\par
+    node* first=crrptr;\par
+    node* newnode=Getnode();\par
+    while(crrptr->link!=first)\par
+    \{\par
+        crrptr=crrptr->link;\par
+    \}\par
+    crrptr->link=newnode;\par
+    newnode->link=first;\par
+\}\par
+void Delete_last(node* crrptr)\par
+\{\par
+    node* first=crrptr;\par
+    while(crrptr->link->link!=first)\par
+    \{\par
+        crrptr=crrptr->link;\par
+    \}\par
+    free(crrptr->link);\par
+    crrptr->link=first;\par
+\}\par
+node* Insert_before(node* crrptr)\par
+\{\par
+    int item;\par
+    node* first=crrptr;\par
+    node* newnode;\par
+    printf("\\nEnter the item:");\par
+    scanf("%d",&item);\par
+    if(crrptr->info==item)\par
+    \{\par
+        newnode=Getnode();\par
+        newnode->link=crrptr;\par
+        while(crrptr->link!=first)\par
+        \{\par
+            crrptr=crrptr->link;\par
+        \}\par
+        crrptr->link=newnode;\par
+        first=newnode;\par
+    \}\par
+    else\par
+    \{\par
+    while(crrptr->link!=first)\par
+    \{\par
+        if(crrptr->link->info==item)\par
+        \{\par
+            break;\par
+        \}\par
+        else\par
+        \{\par
+            crrptr=crrptr->link;\par
+        \}\par
+    \}\par
+    if(crrptr->link->info!=item)\par
+    \{\par
+        printf("\\nNode not found");\par
+    \}\par
+    else\par
+    \{\par
+        newnode=Getnode();\par
+        newnode->link=crrptr->link;\par
+        crrptr->link=newnode;\par
+    \}\par
+    \}\par
+    return first;\par
+\}\par
+node* Delete_any(node* crrptr)\par
+\{\par
+    node* first=crrptr;\par
+    int item;\par
+    int flage=0;\par
+    if(crrptr!=NULL)\par
+    \{\par
+        printf("\\nEnter the info to delete: ");\par
+        scanf("%d",&item);\par
+        if(crrptr->info==item)\par
+        \{\par
+            if(crrptr->link==NULL)\par
+            \{\par
+                return NULL;\par
+            \}\par
+            flage=1;\par
+            crrptr=crrptr->link;\par
+            node* temp=crrptr;\par
+            while(crrptr->link!=first)\par
+            \{\par
+                crrptr=crrptr->link;\par
+            \}\par
+            first=temp;\par
+            crrptr->link=first;\par
+        \}\par
+        else\par
+        \{\par
+            while(crrptr->link!=first)\par
+            \{\par
+                if(crrptr->link->info==item)\par
+                \{\par
+                    flage=1;\par
+                    crrptr->link=crrptr->link->link;\par
+                    break;\par
+                \}\par
+                crrptr=crrptr->link;\par
+            \}\par
+        \}\par
+       \par
+    \}\par
+    if(flage==0)\par
+    \{\par
+        printf("\\nNode not found");\par
+    \}\par
+    return first;\par
+\}\i\fs40\par
+OUTPUT:-\par
+\i0\fs28 PS C:\\Users\\Khushi Patel\\data stucture\\.vscode\\Ds> cd LinkedList\par
+PS C:\\Users\\Khushi Patel\\data stucture\\.vscode\\Ds\\LinkedList> gcc CircularLinkList.cpp\par
+PS C:\\Users\\Khushi Patel\\data stucture\\.vscode\\Ds\\LinkedList> ./a.exe      \par
+\par
+Creation of linked list\par
+Enter info: 5\par
+\par
+Do you want to enter info? y\par
+\par
+Enter info: 7\par
+\par
+Do you want to enter info? y\par
+\par
+Enter info: 6\par
+\par
+Do you want to enter info? y\par
+\par
+Enter info: 4\par
+\par
+Do you want to enter info? n\par
+\par
+Display\par
+5\par
+7\par
+6\par
+4\par
+Insert first\par
+Enter info: 2\par
+\par
+2\par
+5\par
+7\par
+6\par
+4\par
+Delete first node\par
+5\par
+7\par
+6\par
+4\par
+Insert last\par
+Enter info: 1\par
+\par
+5\par
+7\par
+6\par
+4\par
+1\par
+Delete last\par
+5\par
+7\par
+6\par
+4\par
+Insert before\par
+Enter the item:7\par
+\par
+Enter info: 3\par
+\par
+5\par
+3\par
+7\par
+6\par
+4\par
+Delete any\par
+Enter the info to delete: 6\par
+\par
+5\par
+3\par
+7\par
+4\par
+PS C:\\Users\\Khushi Patel\\data stucture\\.vscode\\Ds\\LinkedList> \b0\fs22\par
+}
+ 
