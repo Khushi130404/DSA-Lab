@@ -76,4 +76,4 @@ Welcome to the **DSA Lab** repository! This repo contains various implementation
    ./output
    ```
    
-Happy coding! 🚀
+### Happy coding! 🚀
