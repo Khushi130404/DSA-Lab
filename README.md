@@ -1,4 +1,4 @@
-# 🚀 DSA Lab Programs
+# 🚀 DSA-Lab
 
 Welcome to the **DSA Lab** repository! This repo contains various implementations of **Data Structures and Algorithms (DSA)** concepts, helping you build a strong foundation in programming. 💻✨
 
